@@ -147,10 +147,15 @@ var game = {
             clearInterval(game.intervalID);
             game.checkWrong();
             game.time = 15;
-            $("#time").html(game.time)
-            
+            $("#time").html(game.time);
+
         }
     },
+    timerReset: function () {
+        clearInterval(game.intervalID);
+        game.time = 15;
+        $("#time").html(game.time);
+    }
 }
 game.startGame();
 game.timer();
@@ -160,6 +165,7 @@ game.count();
 $(".answer").on("click", function () {
     game.chosen = $(this).text()
 
+    game.timerReset();
     game.checkAnswer();
     game.checkWrong();
     game.checkGameOver();
