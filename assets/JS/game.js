@@ -80,7 +80,7 @@ var game = {
     rightAnswers: 0,
     wrongAnswers: 0,
     chosen: "",
-    time: 30,
+    time: 15,
     intervalID: 0,
 
     startGame: function () {
@@ -114,7 +114,7 @@ var game = {
 
     checkWrong: function () {
         for (i = 0; i < game.questions.length; i++) {
-            if (game.chosen != game.questions[i].answer && game.chosen != "") {
+            if (game.chosen != game.questions[i].answer && game.chosen != "" || game.time === 0) {
                 game.stage++;
                 game.wrongAnswers++;
                 game.chosen = "";
@@ -145,9 +145,10 @@ var game = {
 
         if (game.time === 0) {
             clearInterval(game.intervalID);
-            game.time = 30;
+            game.checkWrong();
+            game.time = 15;
             $("#time").html(game.time)
-
+            
         }
     },
 }
