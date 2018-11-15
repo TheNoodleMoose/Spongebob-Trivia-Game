@@ -12,3 +12,15 @@ body {
     font-size: 1.2em;
     font-weight: bold;
 }
+
+.start {
+    background: rgb(168, 238, 29);
+    border: 2px solid lightblue;
+    width: 300px;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+
+.start:hover {
+    background: yellow;
+}

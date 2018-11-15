@@ -91,6 +91,7 @@ var game = {
     questionChooser: function () {
         for (i = 0; i < game.questions.length; i++) {
             if (game.stage === game.questions[i].stage) {
+                $(".start").html("")
                 $("#question").html(game.questions[i].question)
                 $("#aAnswer").html(game.questions[i].answers[0])
                 $("#bAnswer").html(game.questions[i].answers[1])
@@ -139,7 +140,7 @@ var game = {
     count: function () {
         if (game.time > 0) {
             game.time--;
-            $("#time").html(game.time)
+            $("#time").html(`${game.time} Seconds Left`)
         }
 
         if (game.time === 0) {
@@ -147,19 +148,29 @@ var game = {
             game.checkWrong();
             game.checkGameOver();
             game.time = 15;
-            $("#time").html(game.time);
+            $("#time").html(`${game.time} Seconds Left`);
 
         }
     },
     timerReset: function () {
         clearInterval(game.intervalID);
         game.time = 15;
-        $("#time").html(game.time);
+        $("#time").html(`${game.time} Seconds Left`);
+    },
+
+    stopGame: function() {
+        $(".questions").empty();
+        $(".start").text("Try Again?")
+        clearInterval(game.intervalID);
     }
 }
-game.startGame();
-game.timer();
-game.count();
+
+$(".start").on("click", function() {
+    game.startGame();
+    game.timer();
+    game.count();
+})
+
 
 
 $(".answer").on("click", function () {
