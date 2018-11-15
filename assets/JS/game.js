@@ -5,13 +5,13 @@ var game = {
     questions: [
         question1 = {
             question: "What is the name of the character with eight tentacles in Spongebob?",
-            answers: ["Plankton","Squidward","Patrick","Old Man Jennkins"],
+            answers: ["Plankton", "Squidward", "Patrick", "Old Man Jennkins"],
             correctAnswer: "Squidward",
             stage: 1
         },
         question2 = {
             question: "Where does Spongebob work at?",
-            answers: ["Krusty Krab","Krusty Dogs","Chum Bucket","Rusty Shack"], 
+            answers: ["Krusty Krab", "Krusty Dogs", "Chum Bucket", "Rusty Shack"],
             correctAnswer: "Krusty Krab",
             stage: 2
 
@@ -19,28 +19,28 @@ var game = {
 
         question3 = {
             question: "Who is Spongebobs best friend?",
-            answers: ["Sandy","Larry","Patrick","Squidward"], 
+            answers: ["Sandy", "Larry", "Patrick", "Squidward"],
             correctAnswer: "Patrick",
             stage: 3
         },
 
         question4 = {
             question: "What is the name of Spongebob's Cousin",
-            answers: ["Stephen","Stanley","Steve","Sean"], 
+            answers: ["Stephen", "Stanley", "Steve", "Sean"],
             correctAnswer: "Stanley",
             stage: 4
         },
 
         question5 = {
             question: "What is the name of Patrick's pet rock?",
-            answers: ["Rocky","Pebble","Patrock","Stoney"], 
-            correctAnswer: "Rocky", 
+            answers: ["Rocky", "Pebble", "Patrock", "Stoney"],
+            correctAnswer: "Rocky",
             stage: 5
         },
 
         question6 = {
             question: "What Animal Attacks Spongebob, Patrick, and Squidward in the camping episode?",
-            answers: ["Dolphin","King Jellyfish","Sea Cow","Sea Bear"], 
+            answers: ["Dolphin", "King Jellyfish", "Sea Cow", "Sea Bear"],
             correctAnswer: "Sea Bear",
             stage: 6
         },
@@ -80,6 +80,8 @@ var game = {
     rightAnswers: 0,
     wrongAnswers: 0,
     chosen: "",
+    time: 30,
+    intervalID: 0,
 
     startGame: function () {
         game.stage = 1;
@@ -98,9 +100,9 @@ var game = {
         }
     },
 
-    checkAnswer: function() {
-        for(i = 0; i < game.questions.length; i++) {
-            if(game.chosen === game.questions[i].correctAnswer && game.stage === game.questions[i].stage) {
+    checkAnswer: function () {
+        for (i = 0; i < game.questions.length; i++) {
+            if (game.chosen === game.questions[i].correctAnswer && game.stage === game.questions[i].stage) {
                 game.stage++;
                 game.rightAnswers++;
                 game.chosen = "";
@@ -110,9 +112,9 @@ var game = {
         }
     },
 
-    checkWrong: function() {
-        for(i = 0; i < game.questions.length; i++) {
-            if(game.chosen != game.questions[i].answer && game.chosen != "") {
+    checkWrong: function () {
+        for (i = 0; i < game.questions.length; i++) {
+            if (game.chosen != game.questions[i].answer && game.chosen != "") {
                 game.stage++;
                 game.wrongAnswers++;
                 game.chosen = "";
@@ -122,14 +124,37 @@ var game = {
         }
     },
 
-    checkGameOver: function() {
-        if(game.stage === game.questions.length + 1) {
+    checkGameOver: function () {
+        if (game.stage === game.questions.length + 1) {
             alert("You Got " + game.rightAnswers + " answers right and You got " + game.wrongAnswers + " answers wrong!")
+            game.wrongAnswers = 0;
+            game.rightAnswers = 0;
+            this.startGame();
         }
-    }
+    },
 
+    timer: function () {
+        game.intervalId = setInterval(game.count, 1000)
+    },
+    count: function () {
+        if (game.time > 0) {
+            game.time--;
+            $("#time").html(game.time)
+            console.log(game.time)
+        }
+
+        if (game.time === 0) {
+            clearInterval(game.intervalID);
+            game.time = 30;
+            $("#time").html(game.time)
+
+        }
+    },
 }
 game.startGame();
+game.timer();
+game.count();
+
 
 $(".answer").on("click", function () {
     game.chosen = $(this).text()
