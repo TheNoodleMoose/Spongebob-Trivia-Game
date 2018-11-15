@@ -124,7 +124,7 @@ var game = {
 
     checkGameOver: function() {
         if(game.stage === game.questions.length + 1) {
-            console.log("You Got " + game.rightAnswers + " answers right and You got " + game.wrongAnswers + " answers wrong!")
+            alert("You Got " + game.rightAnswers + " answers right and You got " + game.wrongAnswers + " answers wrong!")
         }
     }
 
