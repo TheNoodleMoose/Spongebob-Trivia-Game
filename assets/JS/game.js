@@ -1,4 +1,4 @@
-console.log("This works!")
+
 
 var game = {
 
@@ -140,12 +140,12 @@ var game = {
         if (game.time > 0) {
             game.time--;
             $("#time").html(game.time)
-            console.log(game.time)
         }
 
         if (game.time === 0) {
             clearInterval(game.intervalID);
             game.checkWrong();
+            game.checkGameOver();
             game.time = 15;
             $("#time").html(game.time);
 

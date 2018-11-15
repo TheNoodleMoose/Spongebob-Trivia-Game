@@ -1,3 +1,14 @@
+@font-face {
+    font-family: "krabby-patty";
+    src: url(../fonts/Krabby\ Patty.woff) format("woff");
+}
+
 body {
-    background: url("../images/background.jpg")
+    background: url("../images/background.jpg");
+    font-family: "krabby-patty";
+}
+
+#timer {
+    font-size: 1.2em;
+    font-weight: bold;
 }
