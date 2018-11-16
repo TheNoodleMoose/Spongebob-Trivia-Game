@@ -81,13 +81,16 @@ var game = {
     wrongAnswers: 0,
     chosen: "",
     time: 15,
-    intervalID: "",
-    randomIndex: [],
     clockRunning: false,
 
     startGame: function () {
         game.stage = 1;
+        game.wrongAnswers = 0;
+        game.rightAnswers = 0;
         game.questionChooser();
+        $(".try-again").text("")
+        $(".answersRight").text("")
+        $(".answersWrong").text("")
     },
 
     questionChooser: function () {
@@ -100,6 +103,7 @@ var game = {
                 $("#cAnswer").text(game.questions[i].answers[2])
                 $("#dAnswer").text(game.questions[i].answers[3])
             }
+
         }
     },
 
@@ -129,18 +133,15 @@ var game = {
 
     checkGameOver: function () {
         if (game.stage === game.questions.length + 1) {
-            alert("You Got " + game.rightAnswers + " answers right and You got " + game.wrongAnswers + " answers wrong!")
-            game.wrongAnswers = 0;
-            game.rightAnswers = 0;
             this.stopGame();
         }
     },
 
     timer: function () {
-        if(!game.clockRunning) {
+        if (!game.clockRunning) {
             intervalId = setInterval(game.count, 1000)
             game.clockRunning = true;
-          }
+        }
     },
     count: function () {
         if (game.time > 0 && game.clockRunning === true) {
@@ -157,27 +158,31 @@ var game = {
 
         }
     },
+
     timerReset: function () {
         game.time = 15;
         $("#time").html(`${game.time} Seconds Left`);
     },
 
-    stopGame: function() {
-        $(".questions").text("");
+    stopGame: function () {
+        $(".answer").text("");
+        $("#question").text("");
         $(".try-again").text("Try Again?")
+        $(".answersRight").text(`You Got ${game.rightAnswers} Right!`)
+        $(".answersWrong").text(`You Got ${game.wrongAnswers} Wrong!`)
         clearInterval(intervalId);
         game.clockRunning = false;
         $("#time").text("")
     }
 }
 
-$(".start").on("click", function() {
+$(".start").on("click", function () {
     game.startGame();
     game.timer();
     game.count();
 })
 
-$(".try-again").on("click", function() {
+$(".try-again").on("click", function () {
     game.startGame();
     game.timer();
     game.count();
