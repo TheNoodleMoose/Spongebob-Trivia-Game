@@ -1,4 +1,4 @@
-
+var intervalId;
 
 var game = {
 
@@ -81,7 +81,9 @@ var game = {
     wrongAnswers: 0,
     chosen: "",
     time: 15,
-    intervalID: 0,
+    intervalID: "",
+    randomIndex: [],
+    clockRunning: false,
 
     startGame: function () {
         game.stage = 1;
@@ -91,12 +93,12 @@ var game = {
     questionChooser: function () {
         for (i = 0; i < game.questions.length; i++) {
             if (game.stage === game.questions[i].stage) {
-                $(".start").html("")
-                $("#question").html(game.questions[i].question)
-                $("#aAnswer").html(game.questions[i].answers[0])
-                $("#bAnswer").html(game.questions[i].answers[1])
-                $("#cAnswer").html(game.questions[i].answers[2])
-                $("#dAnswer").html(game.questions[i].answers[3])
+                $(".start").text("")
+                $("#question").text(game.questions[i].question)
+                $("#aAnswer").text(game.questions[i].answers[0])
+                $("#bAnswer").text(game.questions[i].answers[1])
+                $("#cAnswer").text(game.questions[i].answers[2])
+                $("#dAnswer").text(game.questions[i].answers[3])
             }
         }
     },
@@ -130,21 +132,24 @@ var game = {
             alert("You Got " + game.rightAnswers + " answers right and You got " + game.wrongAnswers + " answers wrong!")
             game.wrongAnswers = 0;
             game.rightAnswers = 0;
-            this.startGame();
+            this.stopGame();
         }
     },
 
     timer: function () {
-        game.intervalId = setInterval(game.count, 1000)
+        if(!game.clockRunning) {
+            intervalId = setInterval(game.count, 1000)
+            game.clockRunning = true;
+          }
     },
     count: function () {
-        if (game.time > 0) {
+        if (game.time > 0 && game.clockRunning === true) {
             game.time--;
             $("#time").html(`${game.time} Seconds Left`)
+            console.log("I'm Running")
         }
 
-        if (game.time === 0) {
-            clearInterval(game.intervalID);
+        if (game.time === 0 && game.clockRunning === true) {
             game.checkWrong();
             game.checkGameOver();
             game.time = 15;
@@ -153,19 +158,26 @@ var game = {
         }
     },
     timerReset: function () {
-        clearInterval(game.intervalID);
         game.time = 15;
         $("#time").html(`${game.time} Seconds Left`);
     },
 
     stopGame: function() {
-        $(".questions").empty();
-        $(".start").text("Try Again?")
-        clearInterval(game.intervalID);
+        $(".questions").text("");
+        $(".try-again").text("Try Again?")
+        clearInterval(intervalId);
+        game.clockRunning = false;
+        $("#time").text("")
     }
 }
 
 $(".start").on("click", function() {
+    game.startGame();
+    game.timer();
+    game.count();
+})
+
+$(".try-again").on("click", function() {
     game.startGame();
     game.timer();
     game.count();
