@@ -91,6 +91,7 @@ var game = {
         $(".try-again").text("")
         $(".answersRight").text("")
         $(".answersWrong").text("")
+        $(".giphy-sticker").attr("src", "https://giphy.com/embed/YCAZI58mofD6E");
     },
 
     questionChooser: function () {
@@ -147,7 +148,6 @@ var game = {
         if (game.time > 0 && game.clockRunning === true) {
             game.time--;
             $("#time").html(`${game.time} Seconds Left`)
-            console.log("I'm Running")
         }
 
         if (game.time === 0 && game.clockRunning === true) {
@@ -173,6 +173,7 @@ var game = {
         clearInterval(intervalId);
         game.clockRunning = false;
         $("#time").text("")
+        $(".giphy-sticker").attr("src", "https://giphy.com/embed/yqMtk0TfjRa5W")
     }
 }
 
