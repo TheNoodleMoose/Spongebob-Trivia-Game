@@ -147,21 +147,21 @@ var game = {
     count: function () {
         if (game.time > 0 && game.clockRunning === true) {
             game.time--;
-            $("#time").html(`${game.time} Seconds Left`)
+            $("#time").text(`${game.time} Seconds Left`)
         }
 
         if (game.time === 0 && game.clockRunning === true) {
             game.checkWrong();
             game.checkGameOver();
             game.time = 15;
-            $("#time").html(`${game.time} Seconds Left`);
+            $("#time").text(`${game.time} Seconds Left`);
 
         }
     },
 
     timerReset: function () {
         game.time = 15;
-        $("#time").html(`${game.time} Seconds Left`);
+        $("#time").text(`${game.time} Seconds Left`);
     },
 
     stopGame: function () {
