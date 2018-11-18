@@ -2,17 +2,18 @@
     font-family: "krabby-patty";
     src: url(../fonts/Krabby\ Patty.woff) format("woff");
 }
-
+/* global */
 body {
     background: url("../images/background.jpg");
     font-family: "krabby-patty";
 }
-
+/* TIMER */
 #timer {
     font-size: 1.2em;
     font-weight: bold;
 }
-
+  /* START BUTTON  */
+/*<==================>*/
 .start {
     background: rgb(168, 238, 29);
     border: 2px solid lightblue;
@@ -24,7 +25,8 @@ body {
 .start:hover {
     background: yellow;
 }
-
+  /* TRY AGAIN BUTTON */
+/*<====================>*/
 .try-again {
     background: rgb(168, 238, 29);
     border: 2px solid lightblue;
@@ -37,7 +39,8 @@ body {
     background: yellow;
 }
 
-/* Bob */
+  /* Bob */
+/* This is for the floating hover animation on the text */
 @-webkit-keyframes hvr-bob {
     0% {
       -webkit-transform: translateY(-8px);
