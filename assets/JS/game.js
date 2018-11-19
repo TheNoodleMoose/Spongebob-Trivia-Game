@@ -131,7 +131,10 @@ var game = {
                 game.stage++;
                 game.rightAnswers++;
                 game.chosen = "";
-                this.questionChooser();
+                setTimeout(function() {
+                    game.questionChooser();
+                }, 3000)
+                
                 console.log("Right Answers So Far " + game.rightAnswers)
             }
         }
@@ -148,7 +151,9 @@ var game = {
                 game.stage++;
                 game.wrongAnswers++;
                 game.chosen = "";
-                this.questionChooser();
+                setTimeout(function() {
+                    game.questionChooser();
+                }, 3000)
                 console.log("Wrong So Far: " + game.wrongAnswers)
             }
         }
