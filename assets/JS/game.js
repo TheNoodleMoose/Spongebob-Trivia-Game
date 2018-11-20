@@ -113,6 +113,7 @@ var game = {
         for (i = 0; i < game.questions.length; i++) {
             if (game.stage === game.questions[i].stage) {
                 $(".start").text("")
+                $("#gifsGoHere").html("")
                 $("#question").text(game.questions[i].question)
                 $("#aAnswer").text(game.questions[i].answers[0])
                 $("#bAnswer").text(game.questions[i].answers[1])
@@ -131,9 +132,10 @@ var game = {
                 game.stage++;
                 game.rightAnswers++;
                 game.chosen = "";
+                $("#gifsGoHere").html("<iframe src='https://giphy.com/embed/3oEjHV0z8S7WM4MwnK' width='480' height='200' frameBorder='0' class='giphy-embed' allowFullScreen></iframe><p><a href='https://giphy.com/gifs/spongebob-3oEjHV0z8S7WM4MwnK'></a></p>")
                 setTimeout(function() {
                     game.questionChooser();
-                }, 3000)
+                }, 5000)
                 
                 console.log("Right Answers So Far " + game.rightAnswers)
             }
@@ -151,9 +153,7 @@ var game = {
                 game.stage++;
                 game.wrongAnswers++;
                 game.chosen = "";
-                setTimeout(function() {
-                    game.questionChooser();
-                }, 3000)
+                game.questionChooser();
                 console.log("Wrong So Far: " + game.wrongAnswers)
             }
         }
